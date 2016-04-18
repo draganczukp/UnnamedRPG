@@ -1,0 +1,10 @@
+2015/08/19 11:13:47[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=MAIN_BACK, path=img/MainBack.png]
+2015/08/19 11:13:47[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=BUTTON_DEFAUL, path=img/buttonDefault.png]
+2015/08/19 11:13:48[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=TEMP_STATIC_OBJECT, path=img/tempObject.png]
+2015/08/19 11:13:48[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=BACKGROUND_DEFAULT, path=img/mainBack.png]
+2015/08/19 11:13:48[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=PLAYER_SPRITE_SHEET, path=img/template_c.png]
+2015/08/19 11:13:48[INFO]Loading Asset MAIN_BACK
+2015/08/19 11:13:48[INFO]Loading Asset BUTTON_DEFAUL
+2015/08/19 11:13:48[INFO]Loading Asset TEMP_STATIC_OBJECT
+2015/08/19 11:13:48[INFO]Loading Asset BACKGROUND_DEFAULT
+2015/08/19 11:13:48[INFO]Loading Asset PLAYER_SPRITE_SHEET
