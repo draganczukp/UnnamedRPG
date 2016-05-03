@@ -154,8 +154,8 @@ public class InventoryDetails extends Table {
 	}
 
 	public final void setDelay(String delay){
-		if(this.delay == null) this.delay = new Label(delay + " s", skin);
-		else this.delay.setText(delay + " s");
+		if(this.delay == null) this.delay = new Label(Float.parseFloat(delay) / 1000f + " s", skin);
+		else this.delay.setText(Float.parseFloat(delay) / 1000f + " s");
 	}
 
 	/**

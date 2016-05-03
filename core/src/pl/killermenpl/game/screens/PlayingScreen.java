@@ -90,7 +90,6 @@ public class PlayingScreen implements Screen {
 		}));
 		ProgressBarStyle HPBarsStyle = new ProgressBarStyle();
 		HPBarsStyle.background = bars.getDrawable("bar-Background");
-		// HPBar.setDisabled(true);
 		HPBarsStyle.knobBefore = bars.getDrawable("bar-Red");
 		HPBarsStyle.knob = bars.getDrawable("bar-Empty");
 		HPBar.setStyle(HPBarsStyle);
@@ -173,6 +172,7 @@ public class PlayingScreen implements Screen {
 				return false;
 			}
 		}));
+		// TODO: griadient background
 		ScrollPane inventory = new ScrollPane(GameObjectManager.getPlayerObject().inventory);
 		inventory.addAction(Actions.forever(new Action() {
 			@Override
@@ -191,13 +191,13 @@ public class PlayingScreen implements Screen {
 		left.row();
 		left.add(details).expand().right().height(Value.percentHeight(0.2f, table))
 				.width(Value.percentWidth(0.4f, table));
-		;
+
 
 		// System.out.println(details.getParent().getName());
 		table.add(left).expand().left().fill();
 		table.add(inventory).center().expandY().padRight(Value.percentWidth(0.05f, table));
 		table.setFillParent(true);
-		if(Config.debug) table.setDebug(false, true);
+		if(Config.debug) table.setDebug(true, true);
 		stage.addActor(table.top().left());
 		// stage.addActor(GameObjectManager.getPlayerObject().inventory);
 	}

@@ -2,6 +2,7 @@ package pl.killermenpl.game.util;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.Gdx;
 public class GameUtils {
 
 	public static final String GAME_DIR = Gdx.files.getLocalStoragePath();
+
+	public static Random RANDOM = new Random(System.currentTimeMillis());
 
 	public static HashMap<String, String> jsonToMap(String t) throws JSONException {
 

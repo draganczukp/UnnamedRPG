@@ -19,8 +19,12 @@ public class Assets {
 			"img/template_entity_test.png");
 	private static final AssetDescriptor COLLISION = new AssetDescriptor(AssetType.SPRITE, "collision", AssetCategory.MAIN,
 			"img/collision.png");
-	private static final AssetDescriptor HPBAR = new AssetDescriptor(AssetType.SPRITE, "hpBar", AssetCategory.GUI,
-			"img/redBar.9.png");
+	private static final AssetDescriptor REDBAR = new AssetDescriptor(AssetType.SPRITE, "hpBar", AssetCategory.GUI,
+			"img/redBar.png");
+	private static final AssetDescriptor BLACKBAR = new AssetDescriptor(AssetType.SPRITE, "blackBar", AssetCategory.GUI,
+			"img/blackBar.png");
+	private static final AssetDescriptor BARS_ATLAS = new AssetDescriptor(AssetType.ATLAS, "BARS_ATLAS",
+			AssetCategory.GUI, "bars.pack");
 
 	public static final void addAssets() {
 		AssetManager.addToLoad(MAIN_BACK);
@@ -31,6 +35,8 @@ public class Assets {
 		AssetManager.addToLoad(TEMP_TILED_MAP);
 		AssetManager.addToLoad(TEMP_NPC1);
 		AssetManager.addToLoad(COLLISION);
-		AssetManager.addToLoad(HPBAR);
+		AssetManager.addToLoad(REDBAR);
+		AssetManager.addToLoad(BLACKBAR);
+		AssetManager.addToLoad(BARS_ATLAS);
 	}
 }

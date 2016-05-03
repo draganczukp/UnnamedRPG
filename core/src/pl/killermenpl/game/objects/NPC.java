@@ -63,6 +63,7 @@ public class NPC extends LivingObject {
 	}
 
 	public void render(SpriteBatch batch, float dt) {
+		super.render(batch, dt);
 		switch(facing){
 		case DOWN:
 			batch.draw(down, pos.x, pos.y);

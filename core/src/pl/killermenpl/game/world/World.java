@@ -1,6 +1,7 @@
 package pl.killermenpl.game.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -150,10 +151,19 @@ public abstract class World extends InputAdapter {
 		// this.font = null;
 		// this.gui = null;
 		this.mapRenderer = null;
-		World.mousePosition = null;
 		this.normalProjection = null;
 		this.objects = null;
 		System.gc();
+	}
+	
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		
+		//Left click
+		if(button==Buttons.LEFT){
+			GameObjectManager.getPlayerObject().attack();
+		}
+		return true;
 	}
 
 	@Override

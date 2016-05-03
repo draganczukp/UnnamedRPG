@@ -5,13 +5,15 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Asset {
 
 	public static enum AssetType {
-		SPRITE, MUSIC, SOUND, MAP;
+		SPRITE, MUSIC, SOUND, MAP, SKIN, ATLAS;
 	}
 
 	private Object object;
@@ -30,11 +32,20 @@ public class Asset {
 		case MAP:
 			object = new TmxMapLoader().load(path);
 			break;
+		case SKIN:
+			object = new Skin(Gdx.files.internal(path));
+			break;
+		case ATLAS:
+			object = new TextureAtlas(path);
+			break;
 		default:
 			break;
 		}
 	}
 
+	
+	//TODO: .as(Class<t>) return (t) object;
+	
 	public Sprite asSprite() {
 		return (Sprite) object;
 	}
@@ -49,5 +60,14 @@ public class Asset {
 
 	public TiledMap asMap() {
 		return (TiledMap) object;
+	}
+	
+	public Skin asSkin(){
+		return (Skin) object;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T as(Class<T> clazz){
+		return (T) object;
 	}
 }

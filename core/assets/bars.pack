@@ -21,7 +21,7 @@ bar-Blue
   index: -1
 bar-Red
   rotate: false
-  xy: 266, 1
+  xy: 270, 1
   size: 121, 32
   split: 5, 4, 5, 5
   orig: 121, 32

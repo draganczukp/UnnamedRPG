@@ -1,5 +1,6 @@
 package pl.killermenpl.game.world;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 import pl.killermenpl.game.objects.NPC;
@@ -7,6 +8,8 @@ import pl.killermenpl.game.objects.PlayerObject;
 
 public class TestWorld extends World {
 
+	private NPC testNPC;
+	
 	@Override
 	public TestWorld init() {
 		this.mapName = "TEMP_TILED_MAP";
@@ -31,7 +34,9 @@ public class TestWorld extends World {
 //		objects.addObject(tempLivingObject);
 
 		objects.addObject(new PlayerObject(new Vector2(600, 600)).setManager(objects));
-		objects.addObject(new NPC("testNpc", new Vector2(650, 650)));
+		testNPC = new NPC("testNpc", new Vector2(650, 650));
+//		testNPC.setStat("invincible", true);
+		objects.addObject(testNPC);
 
 		//NPC testNpc = new NPC("testNpc", new Vector2(600, 500));
 		//testNpc.setDialogNames(new String[] { "dialog1" });
@@ -45,6 +50,15 @@ public class TestWorld extends World {
 //	public void addGuiElements() {
 //
 //	}
+	
+	@Override
+	public boolean keyDown(int key) {
+//		System.out.println(key);
+		if(key == Keys.NUMPAD_0){
+			testNPC.setDest(new Vector2(800, 400));
+		}
+		return super.keyDown(key);
+	}
 
 	
 

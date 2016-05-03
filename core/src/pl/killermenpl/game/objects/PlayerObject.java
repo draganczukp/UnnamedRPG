@@ -36,25 +36,26 @@ public class PlayerObject extends LivingObject {
 
 	// public Inventory inventory;
 
-	public PlayerObject(Vector2 pos){
+	public PlayerObject(Vector2 pos) {
 		super("PLAYER_SPRITE_SHEET", pos);
 	}
 
-	public GameObject setManager(GameObjectManager manager){
+	public GameObject setManager(GameObjectManager manager) {
 		this.manager = manager;
 		return this;
 	}
 
 	@Override
-	public void init(){
+	public void init() {
 		// setAssetCategory(AssetCategory.MAIN);
 
 		super.init();
 
-		if(inventory == null) inventory = new Inventory();
+		if (inventory == null)
+			inventory = new Inventory();
 
 		frames = sprite.split(32, 64);
-		box.setSize(32, 48);
+		box.setSize(32, 37);
 
 		upAnim = new Animation(0.1f, frames[1][1], frames[1][2], frames[1][3]);
 		downAnim = new Animation(0.1f, frames[0][1], frames[0][2], frames[0][3]);
@@ -83,14 +84,16 @@ public class PlayerObject extends LivingObject {
 	}
 
 	@Override
-	public void render(SpriteBatch batch, float dt){
+	public void render(SpriteBatch batch, float dt) {
 		box.setPosition(pos);
+		box.y += 5;
+		// box.height -= 20;
 		Input in = Gdx.input;
 		processInput(in);
 
-		if(isMovingX || isMovingY){
+		if (isMovingX || isMovingY) {
 			stateTime += dt;
-			switch(facing){
+			switch (facing) {
 			case DOWN:
 				batch.draw(downAnim.getKeyFrame(stateTime), pos.x, pos.y);
 				break;
@@ -107,8 +110,8 @@ public class PlayerObject extends LivingObject {
 				break;
 
 			}
-		}else{
-			switch(facing){
+		} else {
+			switch (facing) {
 			case DOWN:
 				batch.draw(down, pos.x, pos.y);
 				break;
@@ -134,55 +137,53 @@ public class PlayerObject extends LivingObject {
 		// System.out.println(dir.angle());
 	}
 
-	public void processInput(Input in){
-		if(inventory.isVisible()) return;
+	public void processInput(Input in) {
+		if (inventory.isVisible())
+			return;
 
-		Vector2 tmp = new Vector2();
+		Vector2 tmp = Vector2.X.setZero();
 
-		if(in.isKeyPressed(Config.keyLeft)){
+		if (in.isKeyPressed(Config.keyLeft)) {
 			tmp.x = -1;
 			facing = Direction.LEFT;
 			isMovingX = true;
 			dir.setAngle(0);
-		}else if(in.isKeyPressed(Config.keyRight)){
+		} else if (in.isKeyPressed(Config.keyRight)) {
 			tmp.x = 1;
 			facing = Direction.RIGHT;
 			isMovingX = true;
 			dir.setAngle(180);
-		}else{
+		} else {
 			tmp.x = 0;
 			isMovingX = false;
 		}
 
-		if(in.isKeyPressed(Config.keyUp)){
+		if (in.isKeyPressed(Config.keyUp)) {
 			tmp.y = 1;
 			facing = Direction.UP;
 			isMovingY = true;
 			dir.setAngle(90);
-		}else if(in.isKeyPressed(Config.keyDown)){
+		} else if (in.isKeyPressed(Config.keyDown)) {
 			tmp.y = -1;
 			facing = Direction.DOWN;
 			isMovingY = true;
 			dir.setAngle(270);
-		}else{
+		} else {
 			tmp.y = 0;
 			isMovingY = false;
 		}
-		if(in.isKeyPressed(Keys.SHIFT_LEFT)) tmp.scl(2);
+		if (in.isKeyPressed(Keys.SHIFT_LEFT))
+			tmp.scl(2);
 		moveBy(tmp);
 
-		if(in.isKeyJustPressed(Config.keyInterract)){
+		if (in.isKeyJustPressed(Config.keyInterract)) {
 			interract();
-		}
-
-		if(in.justTouched()){
-			inventory.weapon.attack(this);
 		}
 
 	}
 
-	public void moveBy(Vector2 dest){
-		if(manager == null){
+	public void moveBy(Vector2 dest) {
+		if (manager == null) {
 			Log.log(LogLevel.CRITICAL, "PlayerObject doesn't know about other Objects!");
 			Gdx.app.exit();
 		}
@@ -193,23 +194,29 @@ public class PlayerObject extends LivingObject {
 		Rectangle tmpY = new Rectangle(box);
 		tmpY.y += dest.y;
 
-		for(GameObject o : manager.get()){
-			if(o instanceof PlayerObject) continue;
-			if(tmpX.overlaps(o.box)){
+		for (GameObject o : manager.get()) {
+			if (o instanceof PlayerObject)
+				continue;
+			if (tmpX.overlaps(o.box) || tmpX.contains(o.box)) {
 				dest.x = 0;
 			}
-			if(tmpY.overlaps(o.box)){
+			if (tmpY.overlaps(o.box) || tmpY.contains(o.box)) {
 				dest.y = 0;
 			}
 		}
 
-		if(isMovingX) facingBox = tmpX;
-		else if(isMovingY) facingBox = tmpY;
+		if (isMovingX) {
+			facingBox = tmpX;
+			facingBox.x += (dest.x < 0 ? -10 : 10);
+		} else if (isMovingY) {
+			facingBox = tmpY;
+			facingBox.y += (dest.y < 0 ? -10 : 10);
+		}
 
 		setDest(pos.add(dest));
 	}
 
-	public Vector3 getPosition3(){
+	public Vector3 getPosition3() {
 		Vector2 tmp1 = pos.cpy();
 		Vector3 tmp2 = new Vector3();
 
@@ -219,17 +226,18 @@ public class PlayerObject extends LivingObject {
 		return tmp2;
 	}
 
-	public Vector2 getPosition(){
+	public Vector2 getPosition() {
 		return pos;
 	}
 
 	@Override
-	public void interract(){
+	public void interract() {
 
-		for(GameObject o : manager.get()){
-			if(o instanceof PlayerObject) continue;
+		for (GameObject o : manager.get()) {
+			if (o instanceof PlayerObject)
+				continue;
 
-			if(facingBox.overlaps(o.box)){
+			if (facingBox.overlaps(o.box)) {
 				o.interract();
 			}
 		}
@@ -238,8 +246,13 @@ public class PlayerObject extends LivingObject {
 	/**
 	 * @return
 	 */
-	public Direction getDirection(){
+	public Direction getDirection() {
 		return this.facing;
+	}
+
+	public void attack() {
+		if (inventory.weapon != null)
+			inventory.weapon.attack();
 	}
 
 }
