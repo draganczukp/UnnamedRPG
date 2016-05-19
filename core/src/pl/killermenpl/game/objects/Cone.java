@@ -103,8 +103,8 @@ public class Cone extends Polygon {
 		rec.x -= center.x;
 		rec.y -= center.y;
 		center.setZero();
-		System.out.println(center.toString());
-		System.out.println(rec.toString());
+//		System.out.println(center.toString());
+//		System.out.println(rec.toString());
 		Vector2 corners[] = { new Vector2(rec.x, rec.y), new Vector2(rec.x + rec.width, rec.y),
 				new Vector2(rec.x, rec.y + rec.height), new Vector2(rec.x + rec.width, rec.y + rec.height) };
 		

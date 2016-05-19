@@ -5,8 +5,6 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
 
-import pl.killermenpl.game.log.Log;
-import pl.killermenpl.game.log.LogLevel;
 import pl.killermenpl.game.objects.Cone;
 import pl.killermenpl.game.objects.GameObject;
 import pl.killermenpl.game.objects.LivingObject;
@@ -14,6 +12,7 @@ import pl.killermenpl.game.objects.PlayerObject;
 import pl.killermenpl.game.screens.PlayingScreen;
 
 public class ItemWeapon extends Item {
+	// Useless.
 	public enum WeaponType {
 		FISTS, DAGGER, SHORTSWORD,
 		// everything is balanced around that
@@ -53,28 +52,17 @@ public class ItemWeapon extends Item {
 
 	public void attack() {
 		long time = TimeUtils.millis();
-		// System.out.println(time - lastAttack);
 		if (time - lastAttack > attackDelay) {
 			lastAttack = time;
-			// Log.log(LogLevel.DEBUG, "Attack!");
-
 			for (GameObject ob : PlayingScreen.world.objects.get()) {
 				if (!(ob instanceof LivingObject) || ob instanceof PlayerObject)
 					continue;
+
 				LivingObject lObject = (LivingObject) ob;
-
 				Rectangle rec = new Rectangle(lObject.box);
-				
-//				rec.x-= cone.getVertices()[0];
-//				rec.y-= cone.getVertices()[1];
-				System.out.println(cone.collidesWithRectangle(rec));
-				if (Intersector.overlaps(circle, lObject.box) && cone.collidesWithRectangle(rec)) {
-					Log.log(LogLevel.DEBUG, ob.getName());
 
-					// float cDamage = (float) GameUtils.RANDOM.doubles(damage,
-					// damage * (1f / 20f)).average().getAsDouble();
+				if (Intersector.overlaps(circle, lObject.box) && cone.collidesWithRectangle(rec)) {
 					lObject.damage(damage);
-					System.out.println(lObject.getStat("hp"));
 				}
 			}
 		}

@@ -40,8 +40,8 @@ public class Config {
 	// some default values
 
 	// [Display
-	public static int screenHeight = 600;
-	public static int screenWidth = 800;
+	public static int screenHeight = 950;
+	public static int screenWidth = 540;
 
 	public static boolean fullscreen = false;
 

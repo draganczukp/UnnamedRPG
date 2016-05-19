@@ -66,7 +66,11 @@ public class LivingObject extends GameObject {
 		if (action != null)
 			action.action();
 		move(dt);
+
 		box.setPosition(pos);
+		box.y += 7;
+		box.x += 7;
+
 		cone.updateCone();
 		// System.out.println(cone.getVertices());
 		DebugShapeRenderer.drawShape(cone);

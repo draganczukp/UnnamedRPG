@@ -41,8 +41,8 @@ public class AssetManager {
 				// HashMap<String, Asset> map = assets.get(group);
 
 				if(assets.containsKey(asset.name)){
-					Log.log(LogLevel.CRITICAL, "Asset with name " + asset.name + " is already loaded! Aborting!");
-					Gdx.app.exit();
+					Log.log(LogLevel.INFO, "Asset with name " + asset.name + " is already loaded! Skipping!");
+					continue;
 				}
 
 				assets.put(asset.name, new Asset(asset.type, asset.path));

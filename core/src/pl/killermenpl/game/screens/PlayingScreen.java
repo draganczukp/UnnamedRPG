@@ -211,6 +211,7 @@ public class PlayingScreen implements Screen {
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) GameObjectManager.getPlayerObject().modStat("hp", -.2f);
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)) GameObjectManager.getPlayerObject().modStat("hp", .2f);
 
+		stage.getViewport().apply();
 		stage.act(delta);
 		stage.draw();
 	}

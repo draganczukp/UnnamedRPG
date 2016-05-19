@@ -1,8 +1,13 @@
 package pl.killermenpl.game.inventory;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 
+import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.item.Item;
 import pl.killermenpl.game.item.ItemArmor;
 import pl.killermenpl.game.item.ItemDisplay;
@@ -16,6 +21,8 @@ public class Inventory extends Table {
 	public ItemArmor head, body, legs, feet, arms;
 	public ItemWeapon weapon;
 	
+	public Sprite bg;
+	
 	public Inventory(){
 		// padRight(10);
 		// setWidth(100);
@@ -25,6 +32,8 @@ public class Inventory extends Table {
 		// addItem(new ItemArmor("test", 1, ArmorMaterial.IRON,
 		// ArmorType.BODY));
 		weapon = (ItemWeapon) Item.testDaggerWeapon;
+		bg = AssetManager.get("INV_BG").as(TextureAtlas.class).createSprite("inv_bg");
+		
 	}
 
 	@Override
@@ -48,6 +57,12 @@ public class Inventory extends Table {
 		super.act(delta);
 
 	}
+	
+	@Override
+	protected void drawBackground(Batch batch, float parentAlpha, float x, float y) {
+		bg.setBounds(this.getX(), 0, this.getWidth(), 10000);
+		bg.draw(batch, 0.5f);
+	}
 
 	public Inventory addItem(Item item){
 
@@ -57,14 +72,9 @@ public class Inventory extends Table {
 			group.add(itemDisplay);
 			add(itemDisplay).height(0);
 		}else{
-			// if(group.getButtons().random().getItem() == Item.placeholder){
-			// group.clear();
-			// this.clearChildren();
-			// }
 			group.add(itemDisplay);
-			add(itemDisplay).expandX();
+			add(itemDisplay).expandX().width(Value.percentWidth(1f, this));
 		}
-		// if(pane != null) PlayingScreen.getTable().getCell(pane).expandX();
 		row();
 		return this;
 	}
@@ -78,7 +88,6 @@ public class Inventory extends Table {
 	@Override
 	public void setVisible(boolean visible){
 		super.setVisible(visible);
-
 		PlayingScreen.details.setVisible(visible);
 	}
 

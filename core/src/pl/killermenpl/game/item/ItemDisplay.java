@@ -65,8 +65,8 @@ public class ItemDisplay extends TextButton {
 		super(item.name, transparent);
 		this.item = item;
 		this.ammount = ammount;
-		this.pad(new Value.Fixed(8), Value.percentWidth(0.1f, PlayingScreen.getTable()), new Value.Fixed(8),
-				Value.percentWidth(0.1f, PlayingScreen.getTable()));
+		this.pad(new Value.Fixed(8), Value.zero, new Value.Fixed(8),
+				Value.zero);
 		this.getBackground().setMinWidth(250);
 		this.addListener(gestureListener);
 		this.addListener(itemClickListener);

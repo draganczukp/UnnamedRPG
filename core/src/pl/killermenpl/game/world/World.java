@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -13,7 +15,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
+import pl.killermenpl.game.assets.AssetCategory;
 import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.item.Item;
 import pl.killermenpl.game.objects.GameObjectManager;
@@ -26,6 +31,8 @@ public abstract class World extends InputAdapter {
 
 	protected SpriteBatch batch;
 	public static OrthographicCamera cam;
+	public static Viewport camViewport;
+	
 	public TiledMapRenderer mapRenderer;
 
 	// private Array<MapCollisionObject> collisions;
@@ -36,7 +43,7 @@ public abstract class World extends InputAdapter {
 
 	// protected GuiManager gui = new GuiManager();
 	// protected DialogWindowManager dialogs = new DialogWindowManager();
-
+	
 	public String mapName;
 
 	public World init(){
@@ -45,18 +52,20 @@ public abstract class World extends InputAdapter {
 		// Gdx.input.setInputProcessor(this);
 
 		objects.drop();
+		
+		AssetManager.setGroups(AssetCategory.CITY1, AssetCategory.GUI, AssetCategory.MAIN, AssetCategory.TEMP);
+		AssetManager.loadAll();
 
 		batch = new SpriteBatch();
 
 		cam = new OrthographicCamera();
-		cam.setToOrtho(false, 250, 250 * (Gdx.graphics.getHeight() / Gdx.graphics.getHeight()));
-		cam.zoom = 2.5f;
-
+		camViewport = new FitViewport(720, 405, cam);
+//		cam.zoom = 2.5f;
 		mapRenderer = new OrthogonalTiledMapRenderer(AssetManager.get(this.mapName).asMap());
 
 		addObjects();
 		addCollsionObjects();
-
+		addPassageObjects();
 		objects.initAll();
 
 		// normalProjection.setToOrtho2D(0, 0, Gdx.graphics.getWidth(),
@@ -71,13 +80,23 @@ public abstract class World extends InputAdapter {
 		return this;
 	}
 
+	private void addPassageObjects() {
+		TiledMap map = AssetManager.get(mapName).asMap();
+		
+		map.getLayers().get("przejœcie").getObjects().forEach((MapObject object)->{
+			MapProperties props = object.getProperties();
+			
+		});;
+	}
+
 	abstract void addObjects();
 
 	public void render(float delta){
-		cam.normalizeUp();
+//		cam.normalizeUp();
 		// cam.lookAt(100, 100, 0);
 		cam.position.set((GameObjectManager.getPlayerObject()).getPosition3());
-		cam.update();
+//		cam.update();
+		camViewport.apply();
 		mousePosition.set(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 		objects.setMousePosition(mousePosition);
 		DebugShapeRenderer.setCamera(cam);
@@ -129,9 +148,8 @@ public abstract class World extends InputAdapter {
 		// float ratio = height/ width;
 		// System.out.println(height);
 		// cam.viewportHeight = 250*
-		if(cam == null) return;
-		cam.setToOrtho(false, 250, 250 * ((float) height / (float) width));
-		cam.update();
+		if(camViewport == null) return;
+		camViewport.update(width, height);
 	}
 
 	public void dispose(){

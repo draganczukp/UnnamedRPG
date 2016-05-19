@@ -55,7 +55,7 @@ public class PlayerObject extends LivingObject {
 			inventory = new Inventory();
 
 		frames = sprite.split(32, 64);
-		box.setSize(32, 37);
+//		box.setSize(10, 37);
 
 		upAnim = new Animation(0.1f, frames[1][1], frames[1][2], frames[1][3]);
 		downAnim = new Animation(0.1f, frames[0][1], frames[0][2], frames[0][3]);
@@ -86,7 +86,8 @@ public class PlayerObject extends LivingObject {
 	@Override
 	public void render(SpriteBatch batch, float dt) {
 		box.setPosition(pos);
-		box.y += 5;
+		box.y += 7;
+		box.x += 7;
 		// box.height -= 20;
 		Input in = Gdx.input;
 		processInput(in);

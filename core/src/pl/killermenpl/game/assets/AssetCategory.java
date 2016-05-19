@@ -8,5 +8,5 @@ package pl.killermenpl.game.assets;
  *
  */
 public enum AssetCategory {
-	MAIN, GUI, TEMP;
+	MAIN, GUI, TEMP, CITY1;
 }

@@ -12,7 +12,7 @@ public class TestWorld extends World {
 	
 	@Override
 	public TestWorld init() {
-		this.mapName = "TEMP_TILED_MAP";
+		this.mapName = "castle";
 		super.init();
 		return this;
 	}
@@ -33,8 +33,8 @@ public class TestWorld extends World {
 //
 //		objects.addObject(tempLivingObject);
 
-		objects.addObject(new PlayerObject(new Vector2(600, 600)).setManager(objects));
-		testNPC = new NPC("testNpc", new Vector2(650, 650));
+		objects.addObject(new PlayerObject(new Vector2(800, 600)).setManager(objects));
+		testNPC = new NPC("testNpc", new Vector2(850, 650));
 //		testNPC.setStat("invincible", true);
 		objects.addObject(testNPC);
 

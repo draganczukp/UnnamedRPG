@@ -40,7 +40,7 @@ public abstract class GameObject {
 
 	public void init() {
 		sprite = AssetManager.get(getName()).asSprite();
-		box = new Rectangle(pos.x, pos.y, 32, 32);
+		box = new Rectangle(pos.x, pos.y, 18, 35);
 		// inventory = new Inventory();
 	}
 
