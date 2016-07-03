@@ -40,7 +40,7 @@ public abstract class GameObject {
 
 	public void init() {
 		sprite = AssetManager.get(getName()).asSprite();
-		box = new Rectangle(pos.x, pos.y, 18, 35);
+		box = new Rectangle(pos.x, pos.y, 18, 30);
 		// inventory = new Inventory();
 	}
 
@@ -82,6 +82,11 @@ public abstract class GameObject {
 
 	public Vector2 center(){
 		return this.box.getCenter(Vector2.X);
+	}
+
+	public Vector2 getPos() {
+		// TODO Auto-generated method stub
+		return this.pos;
 	}
 
 }

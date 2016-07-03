@@ -13,6 +13,7 @@ import pl.killermenpl.game.assets.Assets;
 import pl.killermenpl.game.config.Config;
 import pl.killermenpl.game.log.Log;
 import pl.killermenpl.game.util.FontUtil;
+import pl.killermenpl.game.world.Worlds;
 
 public class LoadingScreen implements Screen {
 	private int count = 0;
@@ -49,9 +50,9 @@ public class LoadingScreen implements Screen {
 			break;
 		case 3:
 			FontUtil.init();
-			
-			//unneeded atm
-			//FontUtil.addFonts();;
+			break;
+		case 4:
+			Worlds.loadAll();
 			break;
 		case 20:
 			((Game) Gdx.app.getApplicationListener()).setScreen(Screens.MAIN_MENU_SCREEN);

@@ -10,6 +10,7 @@ import pl.killermenpl.game.log.LogLevel;
 
 public class GameObjectManager implements Disposable {
 	private boolean inited = false;
+
 	private Array<GameObject> objects = new Array<GameObject>();
 
 	private static PlayerObject player;
@@ -47,8 +48,11 @@ public class GameObjectManager implements Disposable {
 			Log.log(LogLevel.CRITICAL, "Tried to render uninited Array!");
 			return;
 		}
-		for(GameObject o : objects){
+		player.render(batch, dt);
+		for(int i = 0; i < objects.size; i++){
+			GameObject o = objects.get(i);
 			o.setMousePosition(mousePosition);
+			if(o instanceof PlayerObject) continue;
 			o.render(batch, dt);
 		}
 	}
@@ -75,6 +79,6 @@ public class GameObjectManager implements Disposable {
 
 	public void drop(){
 		inited = false;
-		if(objects.random() != null) objects.clear();
+		objects.clear();
 	}
 }

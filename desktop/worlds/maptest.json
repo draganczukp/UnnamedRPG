@@ -1,0 +1,13 @@
+{
+mapName: castle2
+gameObjects: [
+	{
+		name: testNpc
+		pos: {
+			x: 850
+			y: 650
+		}
+		type: LIVING
+	}
+]
+}

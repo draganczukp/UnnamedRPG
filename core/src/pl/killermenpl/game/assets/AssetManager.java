@@ -2,9 +2,9 @@ package pl.killermenpl.game.assets;
 
 import java.util.HashMap;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
+import pl.killermenpl.game.assets.Asset.AssetType;
 import pl.killermenpl.game.log.Log;
 import pl.killermenpl.game.log.LogLevel;
 
@@ -48,6 +48,7 @@ public class AssetManager {
 				assets.put(asset.name, new Asset(asset.type, asset.path));
 			}
 		}
+		assets.put("emptyPixel", new Asset(AssetType.SPRITE, "emptyPixel"));
 	}
 
 	public static void addToLoad(AssetDescriptor asset){
@@ -77,6 +78,12 @@ public class AssetManager {
 	 */
 	public static Asset get(String name){
 		return assets.get(name);
+	}
+
+	public static void load(AssetDescriptor descriptor){
+		Log.log(LogLevel.DEBUG, "Loading on-demand asset: "+descriptor.toString());
+		Asset asset = new Asset(descriptor.type, descriptor.path);
+		assets.put(descriptor.name, asset);
 	}
 
 }

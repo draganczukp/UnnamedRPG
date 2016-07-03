@@ -23,8 +23,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import pl.killermenpl.game.assets.Asset.AssetType;
+import pl.killermenpl.game.assets.AssetCategory;
+import pl.killermenpl.game.assets.AssetDescriptor;
+import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.config.Config;
 import pl.killermenpl.game.inventory.InventoryDetails;
+import pl.killermenpl.game.log.Log;
+import pl.killermenpl.game.log.LogLevel;
 import pl.killermenpl.game.objects.GameObjectManager;
 import pl.killermenpl.game.world.World;
 import pl.killermenpl.game.world.Worlds;
@@ -32,7 +38,7 @@ import pl.killermenpl.game.world.Worlds;
 public class PlayingScreen implements Screen {
 	public static World world;
 
-	protected InputMultiplexer inputs;
+	protected static InputMultiplexer inputs;
 
 	protected BitmapFont font = new BitmapFont();
 	protected static Table table = new Table();
@@ -46,25 +52,25 @@ public class PlayingScreen implements Screen {
 	public static InventoryDetails details = new InventoryDetails();
 
 	public static void setWorld(World w){
+		Log.log(LogLevel.DEBUG, "Closing world: "+world.mapName);
 		if(world != null) world.close();
-		world = w.init();
-
+		Log.log(LogLevel.DEBUG, "Loading world: "+w.mapName);
+		Log.log(LogLevel.DEBUG, "Loaded world: "+w.mapName);
+		world = w;
+		Screens.PLAY_SCREEN.show();
 	}
 
 	@Override
 	public void show(){
-		if(world == null){
-			setWorld(Worlds.EMPTY_WORLD);
-		}else{
-			world.init();
-		}
+		if(world == null)
+			world = Worlds.get("maptest");
+		
+		Log.log(LogLevel.DEBUG, "Initing world: "+world.mapName);
+		world.init();
 
 		setupUI();
 
-		inputs = new InputMultiplexer(stage, world);
-		Gdx.input.setInputProcessor(inputs);
-
-		// System.out.println(world == null);
+		resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	private void setupUI(){
@@ -200,11 +206,18 @@ public class PlayingScreen implements Screen {
 		if(Config.debug) table.setDebug(true, true);
 		stage.addActor(table.top().left());
 		// stage.addActor(GameObjectManager.getPlayerObject().inventory);
+		
+		inputs = new InputMultiplexer();
+		inputs.addProcessor(0, stage);
+		Gdx.input.setInputProcessor(inputs);
+		
+		
 	}
 
 	@Override
 	public void render(float delta){
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		inputs.addProcessor(1, world);
 
 		world.render(delta);
 

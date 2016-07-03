@@ -3,7 +3,9 @@ package pl.killermenpl.game.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -19,6 +21,10 @@ public class Asset {
 	private Object object;
 
 	public Asset(AssetType type, String path) {
+		if(path.equals("emptyPixel")){
+			this.object = new Sprite(new Texture(new Pixmap(1, 1, Format.Alpha)));
+			return;
+		}
 		switch (type) {
 		case MUSIC:
 			object = Gdx.audio.newMusic(Gdx.files.internal(path));

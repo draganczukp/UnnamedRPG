@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import pl.killermenpl.game.objects.GameObjectManager;
-import pl.killermenpl.game.screens.PlayingScreen;
 import pl.killermenpl.game.util.FontUtil;
 
 public class ItemDisplay extends TextButton {

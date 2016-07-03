@@ -56,9 +56,8 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.0"
         compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
-	compile "com.kotcrab.vis:vis-ui:$visuiVersion"
+		compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile "org.ini4j:ini4j:0.5.4"
-        compile "org.json:json:20141113"
         
     }
 }

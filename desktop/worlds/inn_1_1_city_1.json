@@ -1,0 +1,13 @@
+{
+mapName: inn_1_1_city_1
+gameObjects: [
+	{
+		name: testNpc
+		pos: {
+			x: 850
+			y: 650
+		}
+		type: LIVING
+	}
+]
+}

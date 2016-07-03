@@ -10,7 +10,6 @@ public class StaticObject extends GameObject {
 
 	@Override
 	public void init() {
-		pos = new Vector2();
 		super.init();
 	}
 

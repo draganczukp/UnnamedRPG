@@ -1,18 +1,30 @@
 package pl.killermenpl.game.world;
 
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.Vector2;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
+
+import pl.killermenpl.game.objects.GameObjectData;
+import pl.killermenpl.game.objects.GameObjectData.GameObjectType;
+import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.NPC;
 import pl.killermenpl.game.objects.PlayerObject;
+import pl.killermenpl.game.objects.StaticObject;
 
 public class TestWorld extends World {
 
 	private NPC testNPC;
-	
+
 	@Override
 	public TestWorld init() {
-		this.mapName = "castle";
+		this.mapName = "castle2";
 		super.init();
 		return this;
 	}
@@ -20,46 +32,56 @@ public class TestWorld extends World {
 	@Override
 	public void addObjects() {
 
-		//this.objects.addObject(new StaticObject("TEMP_STATIC_OBJECT", new Vector2(10, 10)).setAssetCategory(AssetCategory.TEMP));
-
-//		LivingObject tempLivingObject = new LivingObject("TEMP_STATIC_OBJECT", new Vector2(30, 30));
-//		tempLivingObject.setAction(() -> {
-//			Input in = Gdx.input;
-//			if (in.isTouched()) {
-//				tempLivingObject.setDest(new Vector2(mousePosition.x - 16, mousePosition.y - 16));
-//			}
-//		});
-//		
-//
-//		objects.addObject(tempLivingObject);
-
-		objects.addObject(new PlayerObject(new Vector2(800, 600)).setManager(objects));
+		objects.addObject(new PlayerObject(new Vector2(1500, 600)).setManager(objects));
 		testNPC = new NPC("testNpc", new Vector2(850, 650));
-//		testNPC.setStat("invincible", true);
 		objects.addObject(testNPC);
 
-		//NPC testNpc = new NPC("testNpc", new Vector2(600, 500));
-		//testNpc.setDialogNames(new String[] { "dialog1" });
-		//objects.addObject(testNpc);
-		// objects.addObject(new NPC("testNpc", new Vector2(600, 400)));
-		//dialogs.addNpc(testNpc);
+//		WorldData test = new WorldData();
+//		test.setMapName(this.mapName);
+//		ArrayList<GameObjectData> objects = new ArrayList<>();
+//		this.objects.get().forEach((ob) -> {
+//			GameObjectData tmp = new GameObjectData();
+//
+//			tmp.setName(ob.getName());
+//			tmp.setPos(ob.getPos());
+//			if (ob instanceof PlayerObject)
+//				return;
+//			else if (ob instanceof LivingObject)
+//				tmp.setType(GameObjectType.LIVING);
+//			else if (ob instanceof StaticObject)
+//				tmp.setType(GameObjectType.STATIC);
+//			else
+//				tmp.setType(GameObjectType.BASE);
+//
+//			objects.add(tmp);
+//		});
+//
+//		test.setGameObjects(objects);
+//		Json json = new Json();
+//
+//		FileHandle file = Gdx.files.local("maptest.json");
+//
+//		try(BufferedWriter writer = new BufferedWriter(new FileWriter(file.file()))) {
+//			writer.write(json.prettyPrint(test));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
-//	@Override
-//	public void addGuiElements() {
-//
-//	}
-	
+	// @Override
+	// public void addGuiElements() {
+	//
+	// }
+
 	@Override
 	public boolean keyDown(int key) {
-//		System.out.println(key);
-		if(key == Keys.NUMPAD_0){
+		// System.out.println(key);
+		if (key == Keys.NUMPAD_0) {
 			testNPC.setDest(new Vector2(800, 400));
 		}
 		return super.keyDown(key);
 	}
-
-	
 
 }
