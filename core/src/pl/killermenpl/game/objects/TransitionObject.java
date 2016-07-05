@@ -1,6 +1,5 @@
 package pl.killermenpl.game.objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Rectangle;
@@ -27,7 +26,7 @@ public class TransitionObject extends StaticObject {
 			props.put("posX", "0");
 		if(!props.containsKey("posY"))
 			props.put("posY", "0");
-		this.targetPos = new Vector2(Float.parseFloat(props.get("posX", String.class))*32, Float.parseFloat(props.get("posY", String.class))*32);
+		this.targetPos = new Vector2(Float.parseFloat(props.get("posX", String.class)), map.get("height", int.class) - Float.parseFloat(props.get("posY", String.class)) / 32);
 		this.map = map;
 	}
 

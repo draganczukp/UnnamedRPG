@@ -23,10 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import pl.killermenpl.game.assets.Asset.AssetType;
-import pl.killermenpl.game.assets.AssetCategory;
-import pl.killermenpl.game.assets.AssetDescriptor;
-import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.config.Config;
 import pl.killermenpl.game.inventory.InventoryDetails;
 import pl.killermenpl.game.log.Log;
@@ -51,21 +47,22 @@ public class PlayingScreen implements Screen {
 
 	public static InventoryDetails details = new InventoryDetails();
 
-	public static void setWorld(World w){
-		Log.log(LogLevel.DEBUG, "Closing world: "+world.mapName);
-		if(world != null) world.close();
-		Log.log(LogLevel.DEBUG, "Loading world: "+w.mapName);
-		Log.log(LogLevel.DEBUG, "Loaded world: "+w.mapName);
+	public static void setWorld(World w) {
+		Log.log(LogLevel.DEBUG, "Closing world: " + world.mapName);
+		if (world != null)
+			world.close();
+		Log.log(LogLevel.DEBUG, "Loading world: " + w.mapName);
+		Log.log(LogLevel.DEBUG, "Loaded world: " + w.mapName);
 		world = w;
 		Screens.PLAY_SCREEN.show();
 	}
 
 	@Override
-	public void show(){
-		if(world == null)
+	public void show() {
+		if (world == null)
 			world = Worlds.get("maptest");
-		
-		Log.log(LogLevel.DEBUG, "Initing world: "+world.mapName);
+
+		Log.log(LogLevel.DEBUG, "Initing world: " + world.mapName);
 		world.init();
 
 		setupUI();
@@ -73,7 +70,7 @@ public class PlayingScreen implements Screen {
 		resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
-	private void setupUI(){
+	private void setupUI() {
 		stage = new Stage();
 
 		skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -86,38 +83,17 @@ public class PlayingScreen implements Screen {
 		Table playerStats = new Table();
 
 		// ProgressBar backgroundBar = new ProgressBar(0,100,1,false, skin);
-		HPBar = new ProgressBar(0, 100, .2f, false, skin);
-		HPBar.addAction(Actions.forever(new Action() {
-			@Override
-			public boolean act(float delta){
-				HPBar.setValue((float) GameObjectManager.getPlayerObject().getStat("hp"));
-				return true;
-			}
-		}));
 		ProgressBarStyle HPBarsStyle = new ProgressBarStyle();
 		HPBarsStyle.background = bars.getDrawable("bar-Background");
 		HPBarsStyle.knobBefore = bars.getDrawable("bar-Red");
 		HPBarsStyle.knob = bars.getDrawable("bar-Empty");
-		HPBar.setStyle(HPBarsStyle);
-
-		MPBar = new ProgressBar(0, 100, .2f, false, skin);
-		MPBar.addAction(Actions.forever(new Action() {
+//		HPBar.setStyle(HPBarsStyle);
+		
+		HPBar = new ProgressBar(0, 100, .2f, false, HPBarsStyle);
+		HPBar.addAction(Actions.forever(new Action() {
 			@Override
-			public boolean act(float delta){
-				MPBar.setValue((float) GameObjectManager.getPlayerObject().getStat("mp"));
-				return true;
-			}
-		}));
-
-		Label HPLabel = new Label("", skin);
-		HPLabel.addAction(Actions.forever(new Action() {
-			@Override
-			public boolean act(float delta){
-				float curr = (Float) GameObjectManager.getPlayerObject().getStat("hp");
-				float max = (float) GameObjectManager.getPlayerObject().getStat("maxhp");
-				HPLabel.setText(Float.toString(Math.round(curr)) + "/" + Float.toString(max));
-				// HPLabel.invalidate();
-				// System.out.println(HPLabel.getText());
+			public boolean act(float delta) {
+				HPBar.setValue((float) GameObjectManager.getPlayerObject().getStat("hp"));
 				return true;
 			}
 		}));
@@ -127,12 +103,35 @@ public class PlayingScreen implements Screen {
 		// HPBar.setDisabled(true);
 		MPBarsStyle.knobBefore = bars.getDrawable("bar-Blue");
 		MPBarsStyle.knob = bars.getDrawable("bar-Empty");
-		MPBar.setStyle(MPBarsStyle);
+//		MPBar.setStyle(MPBarsStyle);
+		
+		MPBar = new ProgressBar(0, 100, .2f, false, MPBarsStyle);
+		MPBar.addAction(Actions.forever(new Action() {
+			@Override
+			public boolean act(float delta) {
+				MPBar.setValue((float) GameObjectManager.getPlayerObject().getStat("mp"));
+				return true;
+			}
+		}));
+
+		Label HPLabel = new Label("", skin);
+		HPLabel.addAction(Actions.forever(new Action() {
+			@Override
+			public boolean act(float delta) {
+				float curr = (Float) GameObjectManager.getPlayerObject().getStat("hp");
+				float max = (float) GameObjectManager.getPlayerObject().getStat("maxhp");
+				HPLabel.setText(Float.toString(Math.round(curr)) + "/" + Float.toString(max));
+				// HPLabel.invalidate();
+				// System.out.println(HPLabel.getText());
+				return true;
+			}
+		}));
+
 
 		Label MPLabel = new Label("", skin);
 		MPLabel.addAction(Actions.forever(new Action() {
 			@Override
-			public boolean act(float delta){
+			public boolean act(float delta) {
 				float curr = (float) GameObjectManager.getPlayerObject().getStat("mp");
 				float max = (float) GameObjectManager.getPlayerObject().getStat("maxmp");
 				MPLabel.setText(Float.toString(Math.round(curr)) + "/" + Float.toString(max));
@@ -160,7 +159,7 @@ public class PlayingScreen implements Screen {
 		Button button = new Button(skin);
 		button.addListener(new ClickListener() {
 			@Override
-			public void clicked(InputEvent event, float x, float y){
+			public void clicked(InputEvent event, float x, float y) {
 				Screens.setScreen(Screens.PLAY_SCREEN);
 			}
 		});
@@ -173,7 +172,7 @@ public class PlayingScreen implements Screen {
 
 		details.addAction(Actions.forever(new Action() {
 			@Override
-			public boolean act(float delta){
+			public boolean act(float delta) {
 				details.setItem(GameObjectManager.getPlayerObject().inventory.getSelected());
 				return false;
 			}
@@ -182,8 +181,8 @@ public class PlayingScreen implements Screen {
 		ScrollPane inventory = new ScrollPane(GameObjectManager.getPlayerObject().inventory);
 		inventory.addAction(Actions.forever(new Action() {
 			@Override
-			public boolean act(float delta){
-				if(!GameObjectManager.getPlayerObject().inventory.isVisible()){
+			public boolean act(float delta) {
+				if (!GameObjectManager.getPlayerObject().inventory.isVisible()) {
 					inventory.cancel();
 				}
 				return false;
@@ -192,37 +191,37 @@ public class PlayingScreen implements Screen {
 		// inventory.pack();
 		inventory.setWidth(300);
 		left.setName("left");
-		left.add(playerStats).expand().center().left().top()
-				.pad(0).maxHeight(Value.percentHeight(0.5f, table));
+		left.add(playerStats).expand().center().left().top().pad(0).maxHeight(Value.percentHeight(0.5f, table));
 		left.row();
 		left.add(details).expand().right().height(Value.percentHeight(0.2f, table))
 				.width(Value.percentWidth(0.4f, table));
-
 
 		// System.out.println(details.getParent().getName());
 		table.add(left).expand().left().fill();
 		table.add(inventory).center().expandY().padRight(Value.percentWidth(0.05f, table));
 		table.setFillParent(true);
-		if(Config.debug) table.setDebug(true, true);
+		if (Config.debug)
+			table.setDebug(true, true);
 		stage.addActor(table.top().left());
 		// stage.addActor(GameObjectManager.getPlayerObject().inventory);
-		
+
 		inputs = new InputMultiplexer();
 		inputs.addProcessor(0, stage);
 		Gdx.input.setInputProcessor(inputs);
-		
-		
+
 	}
 
 	@Override
-	public void render(float delta){
+	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		inputs.addProcessor(1, world);
 
 		world.render(delta);
 
-		if(Gdx.input.isKeyPressed(Keys.LEFT)) GameObjectManager.getPlayerObject().modStat("hp", -.2f);
-		if(Gdx.input.isKeyPressed(Keys.RIGHT)) GameObjectManager.getPlayerObject().modStat("hp", .2f);
+		if (Gdx.input.isKeyPressed(Keys.LEFT))
+			GameObjectManager.getPlayerObject().modStat("hp", -.2f);
+		if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			GameObjectManager.getPlayerObject().modStat("hp", .2f);
 
 		stage.getViewport().apply();
 		stage.act(delta);
@@ -230,32 +229,33 @@ public class PlayingScreen implements Screen {
 	}
 
 	@Override
-	public void pause(){
+	public void pause() {
 
 	}
 
 	@Override
-	public void resume(){
+	public void resume() {
 
 	}
 
 	@Override
-	public void hide(){
+	public void hide() {
 
 	}
 
 	@Override
-	public void resize(int width, int height){
+	public void resize(int width, int height) {
 		world.resize(width, height);
-		if(stage != null) stage.getViewport().update(width, height, true);
+		if (stage != null)
+			stage.getViewport().update(width, height, true);
 	}
 
 	@Override
-	public void dispose(){
+	public void dispose() {
 
 	}
 
-	public static Table getTable(){
+	public static Table getTable() {
 		return table;
 	}
 

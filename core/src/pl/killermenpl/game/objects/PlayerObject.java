@@ -1,7 +1,5 @@
 package pl.killermenpl.game.objects;
 
-import java.util.Arrays;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
@@ -22,26 +20,6 @@ import pl.killermenpl.game.log.LogLevel;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
 public class PlayerObject extends LivingObject {
-
-	@Override
-	public String toString(){
-		System.out.println("PlayerObject\n [facingBox=" + facingBox + ",\n isMovingX=" + isMovingX + ",\n isMovingY="
-				+ isMovingY + ",\n manager=" + manager + ",\n frames=" + Arrays.toString(frames) + ",\n upAnim="
-				+ upAnim + ",\n downAnim=" + downAnim + ",\n leftAnim=" + leftAnim + ",\n rightAnim=" + rightAnim
-				+ ",\n up=" + up + ",\n down=" + down + ",\n left=" + left + ",\n right=" + right + ",\n stateTime="
-				+ stateTime + ",\n stats=" + stats + ",\n speed=" + speed + ",\n dest=" + dest + ",\n dir=" + dir
-				+ ",\n vel=" + vel + ",\n mov=" + mov + ",\n facing=" + facing + ",\n action=" + action
-				+ ",\n inventory=" + inventory + ",\n cone=" + cone + ",\n pos=" + pos + ",\n sprite=" + sprite
-				+ ",\n box=" + box + "]");
-		return "PlayerObject\n [facingBox=" + facingBox + ",\n isMovingX=" + isMovingX + ",\n isMovingY=" + isMovingY
-				+ ",\n manager=" + manager + ",\n frames=" + Arrays.toString(frames) + ",\n upAnim=" + upAnim
-				+ ",\n downAnim=" + downAnim + ",\n leftAnim=" + leftAnim + ",\n rightAnim=" + rightAnim + ",\n up="
-				+ up + ",\n down=" + down + ",\n left=" + left + ",\n right=" + right + ",\n stateTime=" + stateTime
-				+ ",\n stats=" + stats + ",\n speed=" + speed + ",\n dest=" + dest + ",\n dir=" + dir + ",\n vel=" + vel
-				+ ",\n mov=" + mov + ",\n facing=" + facing + ",\n action=" + action + ",\n inventory=" + inventory
-				+ ",\n cone=" + cone + ",\n pos=" + pos + ",\n sprite=" + sprite + ",\n box=" + box + "]";
-	}
-
 	private Rectangle facingBox = new Rectangle();
 	private boolean isMovingX, isMovingY = false;
 

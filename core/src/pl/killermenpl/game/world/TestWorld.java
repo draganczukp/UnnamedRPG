@@ -1,22 +1,10 @@
 package pl.killermenpl.game.world;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Json;
 
-import pl.killermenpl.game.objects.GameObjectData;
-import pl.killermenpl.game.objects.GameObjectData.GameObjectType;
-import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.NPC;
 import pl.killermenpl.game.objects.PlayerObject;
-import pl.killermenpl.game.objects.StaticObject;
 
 public class TestWorld extends World {
 

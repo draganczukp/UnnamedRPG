@@ -653,11 +653,11 @@
     <property name="posY" type="float" value="0"/>
    </properties>
   </object>
-  <object id="6" x="1409.33" y="2434.33" width="29.3333" height="45.3333">
+  <object id="6" x="1408" y="2432" width="29.3333" height="45.3333">
    <properties>
     <property name="map" value="inn_1_1_city_1"/>
-    <property name="posX" type="float" value="0"/>
-    <property name="posY" type="float" value="0"/>
+    <property name="posX" type="float" value="384"/>
+    <property name="posY" type="float" value="672"/>
    </properties>
   </object>
   <object id="7" x="772" y="1893.33" width="26.6667" height="92">

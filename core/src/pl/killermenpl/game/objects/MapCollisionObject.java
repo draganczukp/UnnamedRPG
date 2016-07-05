@@ -3,9 +3,6 @@
  */
 package pl.killermenpl.game.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -39,6 +36,6 @@ public class MapCollisionObject extends GameObject {
 	@Override
 	public void render(SpriteBatch batch, float dt) {
 		DebugShapeRenderer.drawRectangle(box);
-		batch.draw(AssetManager.get("TEMP_STATIC_OBJECT").asSprite(), box.x, box.y, box.width, box.height);
+//		batch.draw(AssetManager.get("TEMP_STATIC_OBJECT").asSprite(), box.x, box.y, box.width, box.height);
 	}
 }
