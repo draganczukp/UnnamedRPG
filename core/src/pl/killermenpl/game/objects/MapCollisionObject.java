@@ -14,7 +14,7 @@ import pl.killermenpl.game.renderers.DebugShapeRenderer;
  * @author killermenpl
  *
  */
-public class MapCollisionObject extends GameObject {
+public class MapCollisionObject extends StaticObject {
 
 	public MapCollisionObject(Vector2 pos) {
 		super("collision", pos);

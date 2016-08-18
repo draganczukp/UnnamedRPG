@@ -20,6 +20,7 @@ public class Worlds {
 
 	static {
 		worldMap.put("in_city_1", IN_CITY_1);
+		
 	}
 
 	public static World get(String worldName) {
@@ -35,7 +36,8 @@ public class Worlds {
 		Json json = new Json();
 
 		FileHandle dir = Gdx.files.local("worlds/");
-//		System.out.println(Gdx.files.getLocalStoragePath());
+//		System.out.println(dir.file().getAbsolutePath());
+		System.out.println(Gdx.files.getLocalStoragePath());
 		for(FileHandle file : dir.list("json")){
 
 			WorldData worldData = json.fromJson(WorldData.class, file.readString());

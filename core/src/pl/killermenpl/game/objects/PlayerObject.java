@@ -12,14 +12,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import pl.killermenpl.game.config.Config;
-import pl.killermenpl.game.inventory.Inventory;
+import pl.killermenpl.game.inventory.CharacterInventory;
 import pl.killermenpl.game.item.Item;
 import pl.killermenpl.game.item.ItemWeapon;
 import pl.killermenpl.game.log.Log;
 import pl.killermenpl.game.log.LogLevel;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
-public class PlayerObject extends LivingObject {
+public class PlayerObject extends LivingObject{
 	private Rectangle facingBox = new Rectangle();
 	private boolean isMovingX, isMovingY = false;
 
@@ -51,7 +51,7 @@ public class PlayerObject extends LivingObject {
 		super.init();
 
 		if (inventory == null)
-			inventory = new Inventory();
+			inventory = new CharacterInventory();
 
 		frames = sprite.split(32, 64);
 //		box.setSize(10, 37);
@@ -177,7 +177,7 @@ public class PlayerObject extends LivingObject {
 		moveBy(tmp);
 
 		if (in.isKeyJustPressed(Config.keyInterract)) {
-			interract();
+			interact();
 		}
 		if(in.isKeyJustPressed(Keys.B))
 			System.out.println("Player: "+pos.toString());
@@ -228,19 +228,14 @@ public class PlayerObject extends LivingObject {
 		return tmp2;
 	}
 
-	public Vector2 getPosition() {
-		return pos;
-	}
-
-	@Override
-	public void interract() {
-
+	
+	public void interact() {
 		for (GameObject o : manager.get()) {
-			if (o instanceof PlayerObject)
+			if (o instanceof PlayerObject || !(o instanceof IInteractable))
 				continue;
 
 			if (facingBox.overlaps(o.box)) {
-				o.interract();
+				((IInteractable) o).interact();
 			}
 		}
 	}

@@ -32,7 +32,9 @@ public class GameObjectManager implements Disposable {
 		}
 
 		for(GameObject o : objects){
-			Log.log(LogLevel.DEBUG, "Initing Object: " + o.getName());
+			if(!(o instanceof MapCollisionObject)){
+//				Log.log(LogLevel.DEBUG, "Initing Object: " + o.getName());
+			}
 			o.init();
 		}
 
@@ -80,5 +82,9 @@ public class GameObjectManager implements Disposable {
 	public void drop(){
 		inited = false;
 		objects.clear();
+	}
+
+	public void remove(GameObject object) {
+		this.objects.removeValue(object, true);
 	}
 }
