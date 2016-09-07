@@ -13,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -27,6 +29,7 @@ import pl.killermenpl.game.objects.MapCollisionObject;
 import pl.killermenpl.game.objects.PlayerObject;
 import pl.killermenpl.game.objects.TransitionObject;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
+import pl.killermenpl.game.save.SaveManager;
 import pl.killermenpl.game.screens.Screens;
 
 public abstract class World extends InputAdapter {
@@ -93,24 +96,21 @@ public abstract class World extends InputAdapter {
 		TiledMap map = AssetManager.get(mapName).asMap();
 		map.getLayers().get("transitions").getObjects().forEach((MapObject object) -> {
 			MapProperties props = object.getProperties();
-			objects.addObject(new TransitionObject(props, map.getProperties()));
+
+			objects.addObject(new TransitionObject(props));
 		});
 		;
 	}
 
-	public void addObjects(){
+	public void addObjects() {
 		TiledMap map = AssetManager.get(mapName).asMap();
-		MapProperties props = map.getLayers()
-				.get("Player")
-				.getObjects()
-				.get("Player")
-				.getProperties();
-//		PlayerObject player = (PlayerObject) new PlayerObject(
-//				new Vector2(props.get("x", Float.class),
-//						props.get("y", Float.class))).setManager(objects);
-		if(targetPos==null){
-			float x = props.get("x",float.class);
-			float y = props.get("y",float.class);
+		MapProperties props = map.getLayers().get("Player").getObjects().get("Player").getProperties();
+		// PlayerObject player = (PlayerObject) new PlayerObject(
+		// new Vector2(props.get("x", Float.class),
+		// props.get("y", Float.class))).setManager(objects);
+		if (targetPos == null) {
+			float x = props.get("x", float.class);
+			float y = props.get("y", float.class);
 			targetPos = new Vector2(x, y);
 		}
 		objects.addObject(new PlayerObject(targetPos).setManager(objects));
@@ -195,6 +195,10 @@ public abstract class World extends InputAdapter {
 	 * 
 	 */
 	public void close() {
+		
+		
+		
+		
 		dispose();
 		this.batch = null;
 		// this.dialogs = null;
@@ -231,6 +235,12 @@ public abstract class World extends InputAdapter {
 		if (key == Keys.I)
 			GameObjectManager.getPlayerObject().inventory
 					.setVisible(!GameObjectManager.getPlayerObject().inventory.isVisible());
+
+		if (key == Keys.F1){
+			SaveManager.get().save(this);
+			SaveManager.get().save(GameObjectManager.getPlayerObject().inventory);
+			System.out.println(new Json(OutputType.json).prettyPrint(SaveManager.get().saveAll()));
+		}
 		return true;
 	}
 

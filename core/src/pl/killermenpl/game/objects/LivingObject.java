@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 import pl.killermenpl.game.assets.AssetManager;
-import pl.killermenpl.game.inventory.Inventory;
+import pl.killermenpl.game.inventory.CharacterInventory;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
 public class LivingObject extends GameObject {
@@ -29,7 +29,7 @@ public class LivingObject extends GameObject {
 
 	protected static NinePatchDrawable hpBar, blackBar;
 
-	public Inventory inventory;
+	public CharacterInventory inventory;
 
 	public Cone cone = new Cone(this);
 

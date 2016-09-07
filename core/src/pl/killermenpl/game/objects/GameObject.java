@@ -64,9 +64,6 @@ public abstract class GameObject {
 		return this;
 	}
 
-	public void interract() {
-		System.out.println("Player Interract");
-	}
 
 	public void setMousePosition(Vector2 mousePosition2){
 		mousePosition = mousePosition2;

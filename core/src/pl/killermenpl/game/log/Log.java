@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import pl.killermenpl.game.config.Config;
 import pl.killermenpl.game.util.GameUtils;
 import pl.killermenpl.game.util.SystemProperties;
 
@@ -39,7 +38,7 @@ public class Log {
 	}
 
 	public static void log(LogLevel level, String msg) {
-		if(level==LogLevel.DEBUG && !Config.debug)
+		if(level==LogLevel.DEBUG/* && !Config.debug*/)
 			return;
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

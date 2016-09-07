@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -36,7 +36,11 @@ public class Asset {
 			object = new Sprite(new Texture(Gdx.files.internal(path)));
 			break;
 		case MAP:
+			try{
 			object = new TmxMapLoader().load(path);
+			}catch(Exception e){
+				throw e;
+			}
 			break;
 		case SKIN:
 			object = new Skin(Gdx.files.internal(path));

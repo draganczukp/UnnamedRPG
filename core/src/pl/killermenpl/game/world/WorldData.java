@@ -3,12 +3,13 @@ package pl.killermenpl.game.world;
 import java.util.ArrayList;
 
 import pl.killermenpl.game.objects.GameObjectData;
+import pl.killermenpl.game.objects.IInteractable;
+import pl.killermenpl.game.objects.StaticObject;
 
-public class WorldData{
+public class WorldData {
 
 	private String mapName;
 	private ArrayList<GameObjectData> gameObjects = new ArrayList<>();
-	
 
 	public String getMapName() {
 		return mapName;
@@ -26,15 +27,16 @@ public class WorldData{
 		this.gameObjects = objects;
 	}
 
-	public World toWorld(){
+	public World toWorld() {
 		World w = new World() {
 			{
 				this.mapName = WorldData.this.mapName;
 			}
+
 			@Override
-			public void addObjects(){
+			public void addObjects() {
 				super.addObjects();
-				for(GameObjectData data : gameObjects){
+				for (GameObjectData data : gameObjects) {
 					this.objects.addObject(data.toGameObject());
 				}
 			}
@@ -48,6 +50,22 @@ public class WorldData{
 		builder.append("WorldData [mapName=").append(mapName).append(", gameObjects=").append(gameObjects).append("]");
 		return builder.toString();
 	}
-	
+
+	public static WorldData fromWorld(World w) {
+		WorldData data = new WorldData();
+		data.mapName = w.mapName;
+
+		ArrayList<GameObjectData> list = new ArrayList<>();
+		w.objects.get().forEach((o) -> {
+			if (!(o instanceof StaticObject) || o instanceof IInteractable) {
+				GameObjectData gameObjectData = new GameObjectData();
+				gameObjectData.name = o.getName();
+				gameObjectData.pos = o.getPos();
+				data.gameObjects.add(gameObjectData);
+			}
+		});
+
+		return data;
+	}
 
 }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
 //TODO: facing dir, images based on that;
-public class NPC extends LivingObject {
+public class NPC extends LivingObject implements IInteractable {
 
 	// private Direction dir = Direction.UP;
 
@@ -41,7 +41,7 @@ public class NPC extends LivingObject {
 	}
 
 	@Override
-	public void interract() {
+	public void interact() {
 		switch (GameObjectManager.getPlayerObject().getDirection()) {
 		case DOWN:
 			this.facing = Direction.UP;

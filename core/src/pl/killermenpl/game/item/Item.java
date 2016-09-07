@@ -12,12 +12,11 @@ import pl.killermenpl.game.item.ItemArmor.ArmorType;
  *
  *         Override this class to make more item types (weapons, armors etc.)
  */
-public abstract class Item {
+public class Item {
 
 	public static final Item placeholder = new Item() {
 		{
 			setBasePrice(0);
-			setId(15);
 			setWeight(0);
 			name = "";
 		}
@@ -33,7 +32,6 @@ public abstract class Item {
 	public static Item testDaggerWeapon = new ItemWeapon("dagger", 10, 2, 25);
 	public static Item fistWeapon = new ItemWeapon("fist", 2, 1000, 10);
 
-	protected int id;
 	protected String name;
 	protected float weight;
 
@@ -55,20 +53,6 @@ public abstract class Item {
 
 	}
 
-	/**
-	 * @return the id
-	 */
-	public final int getId(){
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public final void setId(int id){
-		this.id = id;
-	}
 
 	/**
 	 * @return the name
