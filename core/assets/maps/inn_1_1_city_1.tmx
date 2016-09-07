@@ -207,9 +207,9 @@
   <object id="14" x="702" y="576" width="32" height="32">
    <properties>
     <property name="map" value="inn_1_2_city_1"/>
-    <property name="mapheight" type="int" value="40"/>
-    <property name="posX" type="float" value="1088"/>
-    <property name="posY" type="float" value="1216"/>
+    <property name="mapheight" type="int" value="30"/>
+    <property name="posX" type="float" value="768"/>
+    <property name="posY" type="float" value="896"/>
    </properties>
   </object>
  </objectgroup>

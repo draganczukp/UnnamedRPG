@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=MAIN_BACK, group=MAIN path=img/mainBack.png]
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=BUTTON_DEFAUL, group=GUI path=img/buttonDefault.png]
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=TEMP_STATIC_OBJECT, group=TEMP path=img/tempObjectx32.png]
@@ -11,3 +12,18 @@
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=blackBar, group=GUI path=img/blackBar.png]
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=ATLAS, name=BARS_ATLAS, group=GUI path=bars.pack]
 2016/08/06 12:17:12[INFO]Adding Asset to load. Asset: AssetDescriptor [type=ATLAS, name=INV_BG, group=GUI path=ui/inv_bg.pack]
+=======
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=MAIN_BACK, group=MAIN path=img/mainBack.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=BUTTON_DEFAUL, group=GUI path=img/buttonDefault.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=TEMP_STATIC_OBJECT, group=TEMP path=img/tempObjectx32.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=BACKGROUND_DEFAULT, group=MAIN path=img/mainBack.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=PLAYER_SPRITE_SHEET, group=MAIN path=img/template_c.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=MAP, name=TEMP_TILED_MAP, group=TEMP path=maps/testIsland.tmx]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=MAP, name=castle, group=CITY1 path=maps/castle2.tmx]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=testNpc, group=TEMP path=img/template_entity_test.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=collision, group=MAIN path=img/collision.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=hpBar, group=GUI path=img/redBar.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=SPRITE, name=blackBar, group=GUI path=img/blackBar.png]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=ATLAS, name=BARS_ATLAS, group=GUI path=bars.pack]
+2016/09/07 14:04:01[INFO]Adding Asset to load. Asset: AssetDescriptor [type=ATLAS, name=INV_BG, group=GUI path=ui/inv_bg.pack]
+>>>>>>> refs/remotes/master/master

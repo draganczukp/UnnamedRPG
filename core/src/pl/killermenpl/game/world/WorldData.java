@@ -55,7 +55,7 @@ public class WorldData {
 		WorldData data = new WorldData();
 		data.mapName = w.mapName;
 
-		ArrayList<GameObjectData> list = new ArrayList<>();
+//		ArrayList<GameObjectData> list = new ArrayList<>();
 		w.objects.get().forEach((o) -> {
 			if (!(o instanceof StaticObject) || o instanceof IInteractable) {
 				GameObjectData gameObjectData = new GameObjectData();
