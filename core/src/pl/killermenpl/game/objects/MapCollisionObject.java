@@ -30,7 +30,13 @@ public class MapCollisionObject extends StaticObject {
 
 		this.sprite = AssetManager.get("emptyPixel").asSprite();
 		
+		if(box==null)
 		box = new Rectangle(pos.x, pos.y, 32, 32);
+	}
+	
+	public MapCollisionObject setBox(float width, float height){
+		this.box = new Rectangle(pos.x, pos.y+16f, width, height);
+		return this;
 	}
 
 	@Override
