@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -174,6 +175,16 @@ public abstract class World extends InputAdapter {
 				}
 			}
 		}
+		
+		MapLayer player2 = map.getLayers().get("Collision2");
+		
+		if(player2==null)
+			return;
+		
+		player2.getObjects().forEach(mapObject->{
+			MapProperties mapProperties = mapObject.getProperties();
+			objects.addObject(new MapCollisionObject(new Vector2(mapProperties.get("x", float.class), mapProperties.get("y", float.class))).setBox(mapProperties.get("width", float.class), mapProperties.get("height", float.class)));
+		});
 
 	}
 
