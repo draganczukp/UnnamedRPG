@@ -39,7 +39,6 @@ public class Worlds {
 //		System.out.println(dir.file().getAbsolutePath());
 		System.out.println(Gdx.files.getLocalStoragePath());
 		for(FileHandle file : dir.list("json")){
-
 			WorldData worldData = json.fromJson(WorldData.class, file.readString());
 			Log.log(LogLevel.DEBUG, "Adding world: " + file.nameWithoutExtension()+"\n"+worldData.toString());
 			worldMap.put(file.nameWithoutExtension(), worldData.toWorld());

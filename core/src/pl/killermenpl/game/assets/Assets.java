@@ -4,13 +4,13 @@ import pl.killermenpl.game.assets.Asset.AssetType;
 
 public class Assets {
 	private static final AssetDescriptor MAIN_BACK = new AssetDescriptor(AssetType.SPRITE, "MAIN_BACK",
-			AssetCategory.MAIN, "img/mainBack.png");
+			AssetCategory.MAIN, "img/MainBack.png");
 	private static final AssetDescriptor BUTTON_DEFAUL = new AssetDescriptor(AssetType.SPRITE, "BUTTON_DEFAUL",
 			AssetCategory.GUI, "img/buttonDefault.png");
 	private static final AssetDescriptor TEMP_STATIC_OBJECT = new AssetDescriptor(AssetType.SPRITE,
 			"TEMP_STATIC_OBJECT", AssetCategory.TEMP, "img/tempObjectx32.png");
 	private static final AssetDescriptor BACKGROUND_DEFAULT = new AssetDescriptor(AssetType.SPRITE,
-			"BACKGROUND_DEFAULT", AssetCategory.MAIN, "img/mainBack.png");
+			"BACKGROUND_DEFAULT", AssetCategory.MAIN, "img/MainBack.png");
 	private static final AssetDescriptor PLAYER_SPRITE_SHEET = new AssetDescriptor(AssetType.SPRITE,
 			"PLAYER_SPRITE_SHEET", AssetCategory.MAIN, "img/template_c.png");
 	private static final AssetDescriptor TEMP_TILED_MAP = new AssetDescriptor(AssetType.MAP, "TEMP_TILED_MAP",

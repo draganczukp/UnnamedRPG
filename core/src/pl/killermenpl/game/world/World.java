@@ -34,7 +34,10 @@ import pl.killermenpl.game.save.SaveManager;
 import pl.killermenpl.game.screens.Screens;
 
 public abstract class World extends InputAdapter {
+
+	
 	public GameObjectManager objects = new GameObjectManager();
+	
 
 	protected SpriteBatch batch;
 	public static OrthographicCamera cam;

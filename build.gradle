@@ -58,7 +58,7 @@ project(":core") {
         compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
 		compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile "org.ini4j:ini4j:0.5.4"
-        
+        compile "com.badlogicgames.ashley:ashley:1.7.0"
     }
 }
 
