@@ -1,14 +1,23 @@
 package pl.killermenpl.game.objects;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
 
 import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
 public abstract class GameObject {
+public static class GameObjectProps{
+	public String action, name, sprite;
+}
 
 	/**
 	 * Used to get Sprite from AssetManager.
@@ -24,7 +33,7 @@ public abstract class GameObject {
 	 * batch.draw(sprite, x, y) than
 	 * batch.draw(AssetManager.get("asset").asSprite() every time
 	 */
-	protected Sprite sprite;
+	public Sprite sprite;
 	
 	// protected AssetCategory assetCategory;
 	
@@ -32,6 +41,8 @@ public abstract class GameObject {
 	public static Vector2 mousePosition;
 
 	// protected Inventory inventory;
+	
+	public static Map<String, GameObjectProps> propsMap;
 
 	public GameObject(String name, Vector2 pos) {
 		setName(name);
@@ -82,8 +93,21 @@ public abstract class GameObject {
 	}
 
 	public Vector2 getPos() {
-		// TODO Auto-generated method stub
 		return this.pos;
 	}
 
+	public static void populateMap() {
+		Json json = new Json();
+		propsMap = new HashMap<>();
+
+		FileHandle dir = Gdx.files.local("entities/");
+		// System.out.println(dir.file().getAbsolutePath());
+//		System.out.println(Gdx.files.getLocalStoragePath());
+		for (FileHandle file : dir.list("json")) {
+			GameObjectProps props = json.fromJson(GameObjectProps.class, file);
+			
+			propsMap.put(file.nameWithoutExtension(), props);
+		}
+
+	}
 }

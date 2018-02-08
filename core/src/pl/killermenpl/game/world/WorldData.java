@@ -3,7 +3,9 @@ package pl.killermenpl.game.world;
 import java.util.ArrayList;
 
 import pl.killermenpl.game.objects.GameObjectData;
+import pl.killermenpl.game.objects.GameObjectData.GameObjectType;
 import pl.killermenpl.game.objects.IInteractable;
+import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.StaticObject;
 
 public class WorldData {
@@ -39,6 +41,7 @@ public class WorldData {
 				for (GameObjectData data : gameObjects) {
 					this.objects.addObject(data.toGameObject());
 				}
+				
 			}
 		};
 		return w;
@@ -61,10 +64,12 @@ public class WorldData {
 				GameObjectData gameObjectData = new GameObjectData();
 				gameObjectData.name = o.getName();
 				gameObjectData.pos = o.getPos();
+				gameObjectData.type = (o instanceof LivingObject ? GameObjectType.LIVING : o instanceof StaticObject ? GameObjectType.STATIC : GameObjectType.BASE);
+				gameObjectData.stats =( (LivingObject) o).getStats();
 				data.gameObjects.add(gameObjectData);
 			}
 		});
-
+		
 		return data;
 	}
 

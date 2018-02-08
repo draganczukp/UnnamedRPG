@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import pl.killermenpl.game.config.Config;
 import pl.killermenpl.game.util.GameUtils;
 import pl.killermenpl.game.util.SystemProperties;
 
@@ -15,6 +16,7 @@ public class Log {
 	private static File log;
 	private static FileWriter fw;
 	private static BufferedWriter writer;
+	private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 	public static void init() throws Exception {
 		log = new File(GameUtils.GAME_DIR + "log.txt");
@@ -38,10 +40,9 @@ public class Log {
 	}
 
 	public static void log(LogLevel level, String msg) {
-		if(level==LogLevel.DEBUG/* && !Config.debug*/)
+		if(level==LogLevel.DEBUG && !Config.debug)
 			return;
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 
 		StringBuilder sb = new StringBuilder(dateFormat.format(date));

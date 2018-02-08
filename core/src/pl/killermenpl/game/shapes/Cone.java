@@ -1,9 +1,10 @@
-package pl.killermenpl.game.objects;
+package pl.killermenpl.game.shapes;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.LivingObject.Direction;
 
 public class Cone extends Polygon {
@@ -16,7 +17,7 @@ public class Cone extends Polygon {
 		this.parent = parent;
 	}
 
-	protected void updateCone() {
+	public void updateCone() {
 		center = parent.box.getCenter(center);
 		setVertices(new float[] { center.x, center.y, getConeX1(parent.facing), getConeY1(parent.facing),
 				getConeX2(parent.facing), getConeY2(parent.facing) });
@@ -103,19 +104,18 @@ public class Cone extends Polygon {
 		rec.x -= center.x;
 		rec.y -= center.y;
 		center.setZero();
-//		System.out.println(center.toString());
-//		System.out.println(rec.toString());
+		// System.out.println(center.toString());
+		// System.out.println(rec.toString());
 		Vector2 corners[] = { new Vector2(rec.x, rec.y), new Vector2(rec.x + rec.width, rec.y),
 				new Vector2(rec.x, rec.y + rec.height), new Vector2(rec.x + rec.width, rec.y + rec.height) };
-		
-		
-		switch (parent.facing)		{
+
+		switch (parent.facing) {
 		case DOWN: {
 			Vector2 left = new Vector2(-range, -range);
 			Vector2 right = new Vector2(range, -range);
 			for (Vector2 corner : corners) {
 				if (inSquare(corner, left.x, left.y, right.x, center.y)) {
-					if(corner.x <= -corner.y && corner.x >= corner.y){
+					if (corner.x <= -corner.y && corner.x >= corner.y) {
 						return true;
 					}
 				}
@@ -153,9 +153,9 @@ public class Cone extends Polygon {
 			Vector2 up = new Vector2(center).add(range, range);
 			Vector2 down = new Vector2(center).add(range, -range);
 			for (Vector2 corner : corners) {
-				if(inSquare(corner, center.x, down.y, down.x, up.y)){
+				if (inSquare(corner, center.x, down.y, down.x, up.y)) {
 					// System.out.println("rectangls");
-					if(Math.abs(corner.x) > Math.abs(corner.y)){
+					if (Math.abs(corner.x) > Math.abs(corner.y)) {
 						return true;
 					}
 				}

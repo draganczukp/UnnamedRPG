@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templategroup name="gameObject" nexttemplateid="1">
+ <template name="gameObject" id="0">
+  <object>
+   <properties>
+    <property name="action" value=""/>
+    <property name="jsonFile" value="null"/>
+    <property name="name" value=""/>
+    <property name="sprite" value=""/>
+    <property name="type" value=""/>
+   </properties>
+   <point/>
+  </object>
+ </template>
+</templategroup>

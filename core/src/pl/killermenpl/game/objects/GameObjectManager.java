@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import pl.killermenpl.game.log.Log;
 import pl.killermenpl.game.log.LogLevel;
 
-@Deprecated
+//@Deprecated
 public class GameObjectManager implements Disposable {
 	private boolean inited = false;
 

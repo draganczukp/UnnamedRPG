@@ -49,6 +49,7 @@ public class TransitionObject extends StaticObject {
 			// "+GameObjectManager.getPlayerObject().pos.y);
 			PlayingScreen.setWorld(Worlds.get(props.get("map", String.class)).setPos(targetPos));
 		}
+//		DebugShapeRenderer.drawRectangle(box);
 	}
 
 	@Override

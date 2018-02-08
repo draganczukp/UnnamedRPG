@@ -1,6 +1,5 @@
 package pl.killermenpl.game.screens;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,8 +11,8 @@ import pl.killermenpl.game.assets.AssetCategory;
 import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.assets.Assets;
 import pl.killermenpl.game.config.Config;
-import pl.killermenpl.game.entity.EntityCreator;
 import pl.killermenpl.game.log.Log;
+import pl.killermenpl.game.objects.GameObject;
 import pl.killermenpl.game.util.FontUtil;
 import pl.killermenpl.game.world.Worlds;
 
@@ -54,6 +53,9 @@ public class LoadingScreen implements Screen {
 			FontUtil.init();
 			break;
 		case 4:
+			GameObject.populateMap();
+			break;
+		case 5:
 			Worlds.loadAll();
 			break;
 		case 20:

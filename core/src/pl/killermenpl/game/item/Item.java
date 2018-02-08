@@ -29,7 +29,7 @@ public class Item {
 	public static Item testHandArmor = new ItemArmor("hand", 100, ArmorMaterial.IRON, ArmorType.HANDS);
 	public static Item testFeetArmor = new ItemArmor("feet", 100, ArmorMaterial.IRON, ArmorType.FEET);
 
-	public static Item testDaggerWeapon = new ItemWeapon("dagger", 10, 2, 25);
+	public static Item testDaggerWeapon = new ItemWeapon("dagger", 10, 2, 50);
 	public static Item fistWeapon = new ItemWeapon("fist", 2, 1000, 10);
 
 	protected String name;

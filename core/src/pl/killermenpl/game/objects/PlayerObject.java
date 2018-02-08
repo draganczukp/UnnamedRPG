@@ -3,10 +3,7 @@ package pl.killermenpl.game.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -19,20 +16,13 @@ import pl.killermenpl.game.log.Log;
 import pl.killermenpl.game.log.LogLevel;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 
-public class PlayerObject extends LivingObject{
+public class PlayerObject extends LivingObject {
 	private Rectangle facingBox = new Rectangle();
-	private boolean isMovingX, isMovingY = false;
 
 	/**
 	 * Easy acces for Collision detection and interaction
 	 */
 	private GameObjectManager manager;
-
-	private TextureRegion[][] frames;
-	private Animation upAnim, downAnim, leftAnim, rightAnim;
-	private TextureRegion up, down, left, right;
-	private float stateTime = 0;
-
 	// public Inventory inventory;
 
 	public PlayerObject(Vector2 pos) {
@@ -53,24 +43,6 @@ public class PlayerObject extends LivingObject{
 		if (inventory == null)
 			inventory = new CharacterInventory();
 
-		frames = sprite.split(32, 64);
-//		box.setSize(10, 37);
-
-		upAnim = new Animation(0.1f, frames[1][1], frames[1][2], frames[1][3]);
-		downAnim = new Animation(0.1f, frames[0][1], frames[0][2], frames[0][3]);
-		leftAnim = new Animation(0.1f, frames[0][5], frames[0][6], frames[0][7]);
-		rightAnim = new Animation(0.1f, frames[1][5], frames[1][6], frames[1][7]);
-
-		upAnim.setPlayMode(PlayMode.LOOP);
-		downAnim.setPlayMode(PlayMode.LOOP);
-		leftAnim.setPlayMode(PlayMode.LOOP);
-		rightAnim.setPlayMode(PlayMode.LOOP);
-
-		up = frames[1][1];
-		down = frames[0][1];
-		left = frames[0][5];
-		right = frames[1][5];
-
 		// TODO: Read from save
 		stats.put("maxhp", 100f);
 		stats.put("maxmp", 100f);
@@ -90,45 +62,7 @@ public class PlayerObject extends LivingObject{
 		// box.height -= 20;
 		Input in = Gdx.input;
 		processInput(in);
-
-		if (isMovingX || isMovingY) {
-			stateTime += dt;
-			switch (facing) {
-			case DOWN:
-				batch.draw(downAnim.getKeyFrame(stateTime), pos.x, pos.y);
-				break;
-			case LEFT:
-				batch.draw(leftAnim.getKeyFrame(stateTime), pos.x, pos.y);
-				break;
-			case RIGHT:
-				batch.draw(rightAnim.getKeyFrame(stateTime), pos.x, pos.y);
-				break;
-			case UP:
-				batch.draw(upAnim.getKeyFrame(stateTime), pos.x, pos.y);
-				break;
-			default:
-				break;
-
-			}
-		} else {
-			switch (facing) {
-			case DOWN:
-				batch.draw(down, pos.x, pos.y);
-				break;
-			case LEFT:
-				batch.draw(left, pos.x, pos.y);
-				break;
-			case RIGHT:
-				batch.draw(right, pos.x, pos.y);
-				break;
-			case UP:
-				batch.draw(up, pos.x, pos.y);
-				break;
-			default:
-				break;
-
-			}
-		}
+		drawAnimations(batch, dt);
 		move(dt);
 		cone.updateCone();
 		DebugShapeRenderer.drawShape(cone);
@@ -179,8 +113,8 @@ public class PlayerObject extends LivingObject{
 		if (in.isKeyJustPressed(Config.keyInterract)) {
 			interact();
 		}
-		if(in.isKeyJustPressed(Keys.B))
-			System.out.println("Player: "+pos.toString());
+		if (in.isKeyJustPressed(Keys.B))
+			System.out.println("Player: " + pos.toString());
 
 	}
 
@@ -228,7 +162,6 @@ public class PlayerObject extends LivingObject{
 		return tmp2;
 	}
 
-	
 	public void interact() {
 		for (GameObject o : manager.get()) {
 			if (o instanceof PlayerObject || !(o instanceof IInteractable))

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -19,15 +18,20 @@ import com.badlogic.gdx.utils.JsonWriter.OutputType;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import pl.killermenpl.game.assets.Asset;
 import pl.killermenpl.game.assets.Asset.AssetType;
 import pl.killermenpl.game.assets.AssetCategory;
 import pl.killermenpl.game.assets.AssetDescriptor;
 import pl.killermenpl.game.assets.AssetManager;
 import pl.killermenpl.game.item.Item;
 import pl.killermenpl.game.map.MapRenderer;
+import pl.killermenpl.game.objects.GameObject;
+import pl.killermenpl.game.objects.GameObject.GameObjectProps;
 import pl.killermenpl.game.objects.GameObjectManager;
+import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.MapCollisionObject;
 import pl.killermenpl.game.objects.PlayerObject;
+import pl.killermenpl.game.objects.StaticObject;
 import pl.killermenpl.game.objects.TransitionObject;
 import pl.killermenpl.game.renderers.DebugShapeRenderer;
 import pl.killermenpl.game.save.SaveManager;
@@ -35,9 +39,7 @@ import pl.killermenpl.game.screens.Screens;
 
 public abstract class World extends InputAdapter {
 
-	
 	public GameObjectManager objects = new GameObjectManager();
-	
 
 	protected SpriteBatch batch;
 	public static OrthographicCamera cam;
@@ -103,21 +105,49 @@ public abstract class World extends InputAdapter {
 
 			objects.addObject(new TransitionObject(props));
 		});
-		;
 	}
 
 	public void addObjects() {
 		TiledMap map = AssetManager.get(mapName).asMap();
 		MapProperties props = map.getLayers().get("Player").getObjects().get("Player").getProperties();
-		// PlayerObject player = (PlayerObject) new PlayerObject(
-		// new Vector2(props.get("x", Float.class),
-		// props.get("y", Float.class))).setManager(objects);
 		if (targetPos == null) {
 			float x = props.get("x", float.class);
 			float y = props.get("y", float.class);
 			targetPos = new Vector2(x, y);
 		}
+
 		objects.addObject(new PlayerObject(targetPos).setManager(objects));
+
+		map.getLayers().get("gameObjectLayer").getObjects().forEach(mo -> {
+			MapProperties p = mo.getProperties();
+			GameObject o;
+
+			switch (p.get("type", String.class)) {
+			case "living":
+				o = new LivingObject("", new Vector2());
+			case "static":
+				o = new StaticObject("", new Vector2());
+			default:
+				o = new GameObject("", new Vector2()) {
+				};
+			}
+
+			GameObjectProps gop = GameObject.propsMap.get(p.get("json", String.class));
+			if (gop == null)
+				gop = new GameObjectProps(); // No such json in map
+
+			o.setName(either(o.getName(), either(gop.name, p.get("name", String.class))));
+			Asset a = AssetManager.get(either(gop.sprite, either(p.get("sprite", String.class), o.getName())));
+			if (a != null)
+				o.sprite = a.asSprite();
+
+		});
+	}
+
+	private static <T> T either(T a, T b) {
+		if (a == null || ((String) a) == "")
+			return b;
+		return a;
 	}
 
 	public void render(float delta) {
@@ -134,6 +164,7 @@ public abstract class World extends InputAdapter {
 		mapRenderer.render(objects, delta);
 
 		// mapRenderer.render1
+		
 		// objects.render
 		// mapRenderer.render1
 		try {
@@ -178,16 +209,6 @@ public abstract class World extends InputAdapter {
 				}
 			}
 		}
-		
-		MapLayer player2 = map.getLayers().get("Collision2");
-		
-		if(player2==null)
-			return;
-		
-		player2.getObjects().forEach(mapObject->{
-			MapProperties mapProperties = mapObject.getProperties();
-			objects.addObject(new MapCollisionObject(new Vector2(mapProperties.get("x", float.class), mapProperties.get("y", float.class))).setBox(mapProperties.get("width", float.class), mapProperties.get("height", float.class)));
-		});
 
 	}
 
@@ -209,10 +230,7 @@ public abstract class World extends InputAdapter {
 	 * 
 	 */
 	public void close() {
-		
-		
-		
-		
+
 		dispose();
 		this.batch = null;
 		// this.dialogs = null;
@@ -250,7 +268,7 @@ public abstract class World extends InputAdapter {
 			GameObjectManager.getPlayerObject().inventory
 					.setVisible(!GameObjectManager.getPlayerObject().inventory.isVisible());
 
-		if (key == Keys.F1){
+		if (key == Keys.F1) {
 			SaveManager.get().save(this);
 			SaveManager.get().save(GameObjectManager.getPlayerObject().inventory);
 			System.out.println(new Json(OutputType.json).prettyPrint(SaveManager.get().saveAll()));

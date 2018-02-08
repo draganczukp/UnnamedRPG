@@ -1,5 +1,7 @@
 package pl.killermenpl.game.objects;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class GameObjectData {
@@ -17,34 +19,8 @@ public class GameObjectData {
 //	public float x, y;
 	public Vector2 pos;
 	public GameObjectType type;
-
-//	public JSONObject toJSONObject() {
-//
-//		JSONObject object = new JSONObject();
-//		object.put("name", name);
-//		object.put("pos", new JSONObject().put("x", pos.x).put("y", pos.y));
-//		object.put("type", type);
-//
-//		return object;
-//	}
-//
-//	public static GameObjectData fromJson(String json) {
-//		return fromJson(new JSONObject(json));
-//	}
-//
-//	public static GameObjectData fromJson(JSONObject jsonObject) {
-//		GameObjectData data = new GameObjectData();
-//		data.name = (String) jsonObject.get("name");
-//
-//		JSONObject pos = jsonObject.getJSONObject("pos");
-//		data.pos = new Vector2((float) pos.getDouble("x"), (float) pos.getDouble("y"));
-//
-//		data.type = (GameObjectType) jsonObject.get("type");
-//		
-//		return data;
-//	}
-//
-//	
+	public HashMap<String, Object> stats;
+	
 	public GameObject toGameObject(){
 		GameObject o = null;
 		

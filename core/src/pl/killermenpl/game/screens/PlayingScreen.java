@@ -72,18 +72,21 @@ public class PlayingScreen implements Screen {
 
 	private void setupUI() {
 		stage = new Stage();
-
 		skin = new Skin(Gdx.files.internal("uiskin.json"));
+		Skin bars = new Skin(new TextureAtlas(Gdx.files.internal("bars.pack")));
+		Table playerStats = new Table();
+		ProgressBarStyle HPBarsStyle = new ProgressBarStyle();
+		ProgressBarStyle MPBarsStyle = new ProgressBarStyle();
+		Label HPLabel = new Label("", skin);
+		Label MPLabel = new Label("", skin);
+		Table left = new Table();
+		ScrollPane inventory = new ScrollPane(GameObjectManager.getPlayerObject().inventory);
+		Stack HPStack = new Stack();
+		Stack MPStack = new Stack();
+
+		
 		table.clear();
 		table.setSkin(skin);
-		// ShapeRenderer shapeRenderer = new ShapeRenderer();
-
-		Skin bars = new Skin(new TextureAtlas(Gdx.files.internal("bars.pack")));
-
-		Table playerStats = new Table();
-
-		// ProgressBar backgroundBar = new ProgressBar(0,100,1,false, skin);
-		ProgressBarStyle HPBarsStyle = new ProgressBarStyle();
 		HPBarsStyle.background = bars.getDrawable("bar-Background");
 		HPBarsStyle.knobBefore = bars.getDrawable("bar-Red");
 		HPBarsStyle.knob = bars.getDrawable("bar-Empty");
@@ -98,7 +101,6 @@ public class PlayingScreen implements Screen {
 			}
 		}));
 
-		ProgressBarStyle MPBarsStyle = new ProgressBarStyle();
 		MPBarsStyle.background = bars.getDrawable("bar-Background");
 		// HPBar.setDisabled(true);
 		MPBarsStyle.knobBefore = bars.getDrawable("bar-Blue");
@@ -114,7 +116,6 @@ public class PlayingScreen implements Screen {
 			}
 		}));
 
-		Label HPLabel = new Label("", skin);
 		HPLabel.addAction(Actions.forever(new Action() {
 			@Override
 			public boolean act(float delta) {
@@ -128,7 +129,6 @@ public class PlayingScreen implements Screen {
 		}));
 
 
-		Label MPLabel = new Label("", skin);
 		MPLabel.addAction(Actions.forever(new Action() {
 			@Override
 			public boolean act(float delta) {
@@ -139,11 +139,9 @@ public class PlayingScreen implements Screen {
 			}
 		}));
 
-		Stack HPStack = new Stack();
 		HPStack.add(HPBar);
 		HPStack.add(new Container<Label>(HPLabel).right());
 
-		Stack MPStack = new Stack();
 		MPStack.add(MPBar);
 		MPStack.add(new Container<Label>(MPLabel).right());
 
@@ -167,9 +165,6 @@ public class PlayingScreen implements Screen {
 		playerStats.add(button);
 		playerStats.left().top();
 
-		Table left = new Table();
-		// table.add(playerStats).expand().top().left();
-
 		details.addAction(Actions.forever(new Action() {
 			@Override
 			public boolean act(float delta) {
@@ -178,7 +173,6 @@ public class PlayingScreen implements Screen {
 			}
 		}));
 		// TODO: griadient background
-		ScrollPane inventory = new ScrollPane(GameObjectManager.getPlayerObject().inventory);
 		inventory.addAction(Actions.forever(new Action() {
 			@Override
 			public boolean act(float delta) {

@@ -5,11 +5,11 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.TimeUtils;
 
-import pl.killermenpl.game.objects.Cone;
 import pl.killermenpl.game.objects.GameObject;
 import pl.killermenpl.game.objects.LivingObject;
 import pl.killermenpl.game.objects.PlayerObject;
 import pl.killermenpl.game.screens.PlayingScreen;
+import pl.killermenpl.game.shapes.Cone;
 
 public class ItemWeapon extends Item {
 	// Useless.
